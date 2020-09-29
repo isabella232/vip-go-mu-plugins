@@ -46,41 +46,41 @@ VIP Search automatically replicates any indexing (or delete) operations to the n
 
 Index versions can be managed with the following commands. For more details, see `wp help vip-search index-versions`.
 
-```
-wp vip-search index-versions list <type>
-```
-
 List the available index versions.
 
 ```
-wp vip-search index-versions add <type>
+wp vip-search index-versions list <type>
 ```
 
 Add a new index version and creates it (with mapping) on Elasticsearch. _NOTE_ - this does not do any bulk indexing of content, but it _will_ start the indexing of incremental changes to the new version.
 
 ```
-wp vip-search index-versions get <type> <version_number>
+wp vip-search index-versions add <type>
 ```
 
 Retrieve details of a specific index version.
 
 ```
-wp vip-search index-versions activate <type> <version_number>
+wp vip-search index-versions get <type> <version_number>
 ```
 
 Make the given index version active. The active index is the one that serves site traffic, so be sure the target index is ready for production before switching.
 
 ```
-wp vip-search index-versions get <type> active
+wp vip-search index-versions activate <type> <version_number>
 ```
 
 Get the currently active index version.
 
 ```
-wp vip-search index --indexables=<type> --version=<version_number>
+wp vip-search index-versions get <type> active
 ```
 
 Build a new index version alongside the currently active version. The version number must have already been registered with `wp vip-search index-versions add <type>`.
+
+```
+wp vip-search index --indexables=<type> --version=<version_number>
+```
 
 Once the index is built, it can be made active with `wp vip-search index-versions activate <type> <version_number>`
 
